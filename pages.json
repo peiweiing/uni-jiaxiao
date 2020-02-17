@@ -1,0 +1,80 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "uni-app"
+			}
+		}
+	    ,{
+            "path" : "pages/details/index",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/forum/index",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/user/index",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/kaochang/index",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/kaochangs/index",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/jiaxiao/index",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/jiaxiaos/index",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/log/index",
+            "style" : {}
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#3cc51f",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/logo.png",
+				"selectedIconPath": "static/logo.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/forum/index",
+				"iconPath": "static/logo.png",
+				"selectedIconPath": "static/logo.png",
+				"text": "论坛"
+			},
+			{
+				"pagePath": "pages/log/index",
+				"iconPath": "static/logo.png",
+				"selectedIconPath": "static/logo.png",
+				"text": "消息"
+			},
+			{
+				"pagePath": "pages/user/index",
+				"iconPath": "static/logo.png",
+				"selectedIconPath": "static/logo.png",
+				"text": "我的"
+			}
+		]
+	}
+}
