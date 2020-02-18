@@ -7,7 +7,7 @@
 		</view>
 		
 		<view class="top">
-		  <text>庆华考场</text>
+		  <text>{{detail.name}}</text>
 		</view>
 		
 		<view class="lunbo">
@@ -24,46 +24,48 @@
 		<view class="main">
 		  <view class="kaochang">
 		    <text class="t1">考场信息</text>
-		    <text class="t2">庆华考场乍地一万三千多平方米，单词可容纳考生9000余次庆华考场乍地一万三千多平方米，单词可容纳考生9000余次</text>
+		    <text class="t2">{{detail.description}}</text>
 		  </view>
+		  <form @submit="subjectSubmit">
 		  <view class="baoming">
 		    <text>报名提交</text>
 		    <view class="form">
 		      <view class="view1">
 		        <view>
 		          <text>姓名：</text>
-		          <input></input>
+		          <input name="name"></input>
 		        </view>
 		        <view>
 		          <text>性别：</text>
-		          <input></input>
+		          <input name="sex"></input>
 		        </view>
 		        <view>
 		          <text>招考驾校：</text>
-		          <input></input>
+		          <input name="school"></input>
 		        </view>
 		        <view>
 		          <text>考试科目：</text>
-		          <input></input>
+		          <input name="subject"></input>
 		        </view>
 		      </view>
 		      <view class="view2">
 		        <view>
 		          <text>学员身份证号：</text>
-		          <input></input>
+		          <input name="sand"></input>
 		        </view>
 		        <view>
 		          <text>教练姓名：</text>
-		          <input></input>
+		          <input name="coach"></input>
 		        </view>
 		        <view>
 		          <text>教练联系方式：</text>
-		          <input></input>
+		          <input name="coach_phone"></input>
 		        </view>
 		      </view>
 		      </view>
-		    <button>提交</button>
 		  </view>
+		  <button form-type="submit">提交</button>
+		  </form>
 		</view>
 		
 	</view>
@@ -74,6 +76,8 @@
 	export default {
 		data() {
 			return {
+				"id":'',
+				"detail":[],
 				"bnrUrl": [
 				  { "url": "../../static/img/lunbo.png" },
 				  { "url": "../../static/img/lunbo.png" },
@@ -87,8 +91,67 @@
 				],
 			}
 		},
+		onLoad(options) {
+			this.id = options.id;
+			this.room_detail(options.id)
+		},
 		methods: {
-			
+			room_detail(id){
+				var url = this.$url;
+				uni.request({
+					url:url+'Index/room_detail',
+					data:{
+						room_id:id
+					},
+					method:'POST',
+					success: (e) => {
+						if(e.data.error == 400){
+							uni.showModal({
+								title:'提示',
+								content:e.data.info,
+								success:function(res){
+									if(res.confirm){
+										uni.navigateBack({
+										    delta: 2
+										});
+									}else if(res.cancel){
+										uni.navigateBack({
+										    delta: 2
+										});
+									}
+								}
+							})
+						}else if(e.data.error == 200){
+							this.detail = e.data.data
+						}
+					},
+					fail: (res) => {
+						uni.showToast({
+							title:'网络请求错误',
+							icon:'none',
+							duration:2000
+						})
+					}
+				})
+			},
+			subjectSubmit:function(e){
+				var formdata = e.detail.value
+				var url = this.$url;
+				uni.request({
+					url:url+'Index/student_apply',
+					data:{
+						student_id:1,
+						student_name:formdata.name,
+						driving_room_id:this.detail.id,
+						room_name:this.detail.name,
+						
+					},
+					method:'POST',
+					success: (res) => {
+						console.log(res);
+					}
+				})
+			}
 		}
 	}
 </script>

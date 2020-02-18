@@ -7,23 +7,21 @@
 		
 		<view class="top">
 		  <view class="logo">
-			<image src="../../static/img/logo.png"></image>
+			<image :src="article.pic"></image>
 			<view class="h1">
-			  <text>大新县新运机动车驾驶培训</text>
+			  <text>{{article.name}}</text>
 			  <view>
-				<text>2018-12-12</text>
+				<text>{{article.create_time}}</text>
 				<text>人气 0</text>
 			  </view>
 			</view>
 		  </view>
 		  <view class="title">
-			<text>大新科目一、四注意事项</text>
+			<text>{{article.title}}</text>
 		  </view>
 		  <view class="text">
 			<text>
-			  科目一、科目四学院注意事项
-			  各位学员请注意:下面宣读一下考生须知，请大家保持考场安静，认真倾听。
-			  1.候考的学院请照位置坐好，不要站在通道，点到名字的学院才可以存东西，存包柜的条码纸只可以使用依次，使用过的条码纸请丢到垃圾桶内，不要随地乱扔，披头散发的学院请将头发扎起来。
+			  <rich-text :nodes="article.content"></rich-text>
 			</text>
 		  </view>
 		</view>
@@ -78,6 +76,9 @@
 		},
 		data() {
 			return {
+				article:'',
+				content:'',
+				content_status:true,
 				current: 0,
 				items: [
 					'回复',
@@ -85,11 +86,52 @@
 				]
 			}
 		},
+		onLoad(options) {
+			var id = options.id;
+			this.get_article_content(id);
+		},
 		methods: {
 			onClickItem(index) {
 				if (this.current !== index) {
 					this.current = index
 				}
+			},
+			get_article_content(id){
+				var url = this.$url;
+				uni.request({
+					url:url+'Index/article_evaluation',
+					data:{
+						id:id
+					},
+					method:'POST',
+					success: (e) => {
+						if(e.data.error == 200){
+							this.article = e.data.data.article
+							if(e.data.data.content.status == 200){
+								this.content = e.data.data.content.res
+							}else if(e.data.data.content.status == 400){
+								this.content_status = false;
+								this.content = e.data.data.content.res;
+							}
+						}else if(e.data.error == 400){
+							uni.showModal({
+								title:'提示',
+								content:e.data.info,
+								success:function(res){
+									if(res.confirm){
+										uni.navigateBack({
+										    delta: 2
+										});
+									}else if(res.cancel){
+										uni.navigateBack({
+										    delta: 2
+										});
+									}
+								}
+							})
+						}
+					}
+				})
 			}
 		}
 	}

@@ -34,7 +34,7 @@
 		<view class="div">
 			<text @click="kaochang">考场推荐</text>
 			<view class="divcs" v-if="room_status">
-				<view v-for="(v,i) in arra" @click="kaochangs">
+				<view v-for="(v,i) in arra" :data-id="v.id" @click="kaochangs">
 					<image :src="v.pic"></image>
 				</view>
 			</view>
@@ -94,9 +94,10 @@ import Swiper from '../../components/swiper.vue'
 					url: '/pages/kaochang/index'
 				});
 			},
-			kaochangs(){
+			kaochangs(e){
+				var id = e.currentTarget.dataset.id;
 				uni.navigateTo({
-					url: '/pages/kaochangs/index'
+					url: '/pages/kaochangs/index?id='+id
 				});
 				
 			},
