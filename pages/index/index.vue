@@ -19,7 +19,7 @@
 					<view class="page-section-spacing u-wrp-bnr">
 						<swiper class="swiper" indicatorDots:true autoplay:true interval:2000 duration:500>
 							<swiper-item v-for="(v,i) in lunbo" :key="i">
-								<image :src="v.src" class='u-img-slide'></image>
+								<image :src="v.pic" class='u-img-slide'></image>
 							</swiper-item>
 						</swiper>
 					</view>
@@ -33,19 +33,21 @@
 		
 		<view class="div">
 			<text @click="kaochang">考场推荐</text>
-			<view class="divcs">
+			<view class="divcs" v-if="room_status">
 				<view v-for="(v,i) in arra" @click="kaochangs">
-					<image :src="v.src"></image>
+					<image :src="v.pic"></image>
 				</view>
 			</view>
+			<view class="divcs" v-else><text>{{arra}}</text></view>
 		</view>
 		<view class="div">
 			<text @click="jiaxiao">驾校推荐</text>
-			<view class="divcs">
+			<view class="divcs" v-if="school_status">
 				<view v-for="(v,i) in arrb" @click="jiaxiaos">
-					<image :src="v.src"></image>
+					<image :src="v.pic"></image>
 				</view>
 			</view>
+			<view class="divcs" v-else><text style="color: red;">{{arrb}}</text></view>
 		</view>
 		
 	</view>
@@ -53,6 +55,7 @@
 
 <script>
 import Swiper from '../../components/swiper.vue'
+// import t from '../../main.js'
 	export default {
 		components:{
 			Swiper,
@@ -60,10 +63,11 @@ import Swiper from '../../components/swiper.vue'
 		data() {
 			return {
 				title: 'Hello',
+				banner_status : true,
+				room_status:true,
+				school_status:true,
 				lunbo:[
-					{src:'../../static/img/lunbo.png'},
-					{src:'../../static/img/lunbo.png'},
-					{src:'../../static/img/lunbo.png'},
+					
 				],
 				icon:[
 					{src:'../../static/img/xiao.png',txt:'考场详情',url:''},
@@ -72,19 +76,17 @@ import Swiper from '../../components/swiper.vue'
 					{src:'../../static/img/xiao.png',txt:'考场详情',url:''},
 				],
 				arra:[
-					{src:'../../static/img/kaochang.png'},
-					{src:'../../static/img/kaochang.png'},
-					{src:'../../static/img/kaochang.png'},
+					
 				],
 				arrb:[
-					{src:'../../static/img/kaochang.png'},
-					{src:'../../static/img/kaochang.png'},
-					{src:'../../static/img/kaochang.png'},
+					
 				]
 			}
 		},
 		onLoad() {
-
+			this.getbanner();
+			this.getdriving_room();
+			this.getdriving_school();
 		},
 		methods: {
 			kaochang(){
@@ -109,8 +111,60 @@ import Swiper from '../../components/swiper.vue'
 					url: '/pages/jiaxiaos/index'
 				});
 				
+			},
+			/* 
+				轮播图
+			 */
+			getbanner(){
+				var url = this.$url;
+				uni.request({
+					url:url+'Index/get_banner',
+					success:(e)=>{
+						if (e.data.error == 400) {
+						  this.banner_status = false;
+						  this.lunbo = e.data.info;
+						} else if(e.data.error == 200){
+							this.lunbo = e.data.data;
+						}
+					}
+				})
+			},
+			/* 
+				考场推荐
+			 */
+			getdriving_room(){
+				var url = this.$url;
+				uni.request({
+					url:url+'Index/driving_room',
+					success:(e)=>{
+						if(e.data.error == 400){
+							this.room_status = false;
+							this.arra = e.data.info;
+						}else if(e.data.error == 200){
+							this.arra = e.data.data;
+						}
+					}
+				})
+			},
+			/* 
+				驾校推荐
+			 */
+			getdriving_school(){
+				var url = this.$url;
+				uni.request({
+					url:url+'Index/driving_school',
+					success: (e) => {
+						if(e.data.error == 400){
+							this.school_status = false,
+							this.arrb = e.data.info
+						}else if(e.data.error == 200){
+							this.arrb = e.data.data;
+						}
+					}
+				})
 			}
-		}
+		},
+		
 	}
 </script>
 
