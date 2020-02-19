@@ -17,12 +17,12 @@
 		</view>
 		
 		<view class="divcs">
-		  <view class="div" v-for="(v,i) in arr">
-			<image :src="v.src"></image>
+		  <view class="div" v-for="(v,i) in school_res">
+			<image :src="v.pic"></image>
 			<view class="txt">
-			  <text class="t1">{{v.txt}}</text>
-			  <text class="t2">{{v.text}}</text>
-			  <text class="t3">￥{{v.money}}</text>
+			  <text class="t1">{{v.name}}</text>
+			  <text class="t2">{{v.description}}</text>
+			  <text class="t3">￥{{v.price}}</text>
 			</view>
 		  </view>
 		</view>
@@ -34,6 +34,7 @@
 	export default {
 		data() {
 			return {
+				school_res:[],
 				imageurl1: "../../static/img/xiangxia.png",
 				daindex1: 0,
 				imageurl2: "../../static/img/xiangxia.png",
@@ -47,6 +48,9 @@
 					{src:'../../static/img/kaochang.png/',txt:'鹏程驾校报名费1888全程无忧等等',text:'硼砂发动快速了解士大夫是打开链接',money:'999'},
 				]
 			}
+		},
+		onLoad() {
+			this.getdriving_school();
 		},
 		methods: {
 			
@@ -89,6 +93,21 @@
 			      })
 			    }
 			  },
+			  getdriving_school(){
+				  var url = this.$url;
+				  uni.request({
+				  	url:url+'Index/driving_school_all',
+					success: (e) => {
+						if(e.data.error == 200){
+							this.school_res = e.data.data
+						}else if(e.data.error == 400){
+							this.school_status = false;
+							this.school_res = e.data.info;
+							
+						}
+					}
+				  })
+			  }
 		}
 	}
 </script>

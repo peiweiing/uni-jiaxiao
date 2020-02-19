@@ -18,19 +18,19 @@
 			<text>{{v.txt}}</text>
 		  </view>
 		</view>
-		<view class="div" v-for="(v,i) in main" :key="i">
-		  <view class="divtop" @click="ondetails">
+		<view class="div" v-for="(v,i) in article_res" :key="i">
+		  <view class="divtop" :data-id="v.id" @click="ondetails">
 			<view class="one">
-			  <image :src="v.ttsrc"></image>
-			  <text>{{v.title}}</text>
+			  <image :src="v.pic"></image>
+			  <text>{{v.name}}</text>
 			</view>
 			<view class="two">
-			  <text class="two1">{{v.h1}}</text>
-			  <text class="two2">{{v.text}}</text>
+			  <text class="two1">{{v.title}}</text>
+			  <text class="two2"><rich-text :nodes="v.content"></rich-text></text>
 			</view>
 			<view class="three">
-			  <text class="three1">{{v.time}}</text>
-			  <text class="three2">{{v.butt}}</text>
+			  <text class="three1">{{v.create_time}}</text>
+			  <text class="three2">考试须知</text>
 			</view>
 			<view class="pinglun">
 			</view>
@@ -80,16 +80,33 @@
 				  { src: "../../static/img/xpinglun.png", txt: "评论", url: "" },
 				  { src: "../../static/img/xshoucang.png", txt: "7", url: ""},
 				],
+				article_status:true,
+				article_res:[]
 			}
 		},
 		onLoad() {
-
+			this.getarticle_result();
 		},
 		methods: {
-			ondetails(){
+			ondetails(e){
+				var id = e.currentTarget.dataset.id;
 				uni.navigateTo({
-					url: '/pages/details/index'
+					url: '/pages/details/index?id='+id
 				});
+			},
+			getarticle_result(){
+				var url = this.$url;
+				uni.request({
+					url:url+'Index/article_result',
+					success: (e) => {
+						if(e.data.error == 400){
+							this.article_status = false;
+							this.article_res = e.data.info;
+						}else if(e.data.error == 200){
+							this.article_res = e.data.data.data;
+						}
+					}
+				})
 			}
 		}
 	}

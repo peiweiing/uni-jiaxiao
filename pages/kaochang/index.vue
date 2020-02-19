@@ -5,11 +5,11 @@
 		  <text>今日首推</text>
 		  <view class="divcs">
 			<view class="width">
-			  <view class="div" v-for="(v,i) in arra">
-				<image :src="v.src"></image>
-				<text>{{v.txt}}</text>
+			  <view class="div" v-for="(v,i) in position_room">
+				<image :src="v.pic"></image>
+				<text>{{v.title}}</text>
 				<view class="txt">
-				  <text>￥{{v.money}}</text>
+				  <text>￥{{v.price}}</text>
 				  <view>
 					<image src="../../static/img/shoucang.png"></image>
 					<image src="../../static/img/pinglun.png"></image>
@@ -23,11 +23,11 @@
 		<view class="end">
 		  <text>当前热门</text>
 		  <view class="divcs">
-			<view class="div" v-for="(v,i) in arrb">
-				<image :src="v.src"></image>
-				<text>{{v.txt}}</text>
+			<view class="div" v-for="(v,i) in hot_room">
+				<image :src="v.pic"></image>
+				<text>{{v.title}}</text>
 				<view class="txt">
-				  <text>￥{{v.money}}</text>
+				  <text>￥{{v.price}}</text>
 				<view>
 				  <image src="../../static/img/shoucang.png"></image>
 				  <image src="../../static/img/pinglun.png"></image>
@@ -44,6 +44,8 @@
 	export default {
 		data() {
 			return {
+				position_room:[],
+				hot_room:[],
 				arra:[
 					{src:'../../static/img/lunbo.png',txt:'清华考场明日可约学员200人次',money:'999'},
 					{src:'../../static/img/lunbo.png',txt:'清华考场明日可约学员200人次',money:'999'},
@@ -56,8 +58,40 @@
 				]
 			}
 		},
+		onLoad() {
+			this.getposition_room();
+			this.gethot_room();
+		},
 		methods: {
-			
+			/* 
+				今日首推考场
+			 */
+			getposition_room(){
+				var url = this.$url;
+				console.log(url);
+				uni.request({
+					url:url+'Index/position_room',
+					success: (e) => {
+						if(e.data.error == 200){
+							this.position_room = e.data.data
+						}
+					}
+				})
+			},
+			/* 
+				热门考场
+			 */
+			gethot_room(){
+				var url = this.$url;
+				uni.request({
+					url:url+'Index/hot_room',
+					success: (e) => {
+						if(e.data.error == 200){
+							this.hot_room = e.data.data
+						}
+					}
+				})
+			}
 		}
 	}
 </script>
