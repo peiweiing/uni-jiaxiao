@@ -2,11 +2,11 @@
 	<view>
 		
 		<view class="divcs">
-		  <view class="div" v-for="s in arr">
-		    <image :src="s.src"></image>
+		  <view class="div" v-for="s in apponitment_res">
+		    <image :src="s.pic"></image>
 		    <view>
-		      <text class="t1">{{s.txt}}</text>
-		      <text class="t2">￥{{s.money}}</text>
+		      <text class="t1">{{s.license_name}}</text>
+		      <text class="t2">￥{{s.price}}</text>
 		    </view>
 		  </view>
 		</view>
@@ -18,15 +18,34 @@
 	export default {
 		data() {
 			return {
-				arr: [
-				  { src: "../../static/img/lunbo.png", txt: "约课内容约课内容约课内容", money: "999" },
-				  { src: "../../static/img/lunbo.png", txt: "约课内容约课内容约课内容", money: "999" },
-				  { src: "../../static/img/lunbo.png", txt: "约课内容约课内容约课内容", money: "999" },
+				apponitment_status:true,
+				apponitment_res: [
+				  
 				]
 			}
 		},
+		onLoad() {
+			this.get_student_apponitment();
+		},
 		methods: {
-			
+			get_student_apponitment(){
+				var url = this.$url;
+				uni.request({
+					url:url+'Index/student_apponitment',
+					data:{
+						student_id:1
+					},
+					method:'POST',
+					success: (e) => {
+						if(e.data.error == 400){
+							this.apponitment_status = false;
+							this.apponitment_res = e.data.info;
+						}else{
+							this.apponitment_res = e.data.data;
+						}
+					}
+				})
+			}
 		}
 	}
 </script>

@@ -1,17 +1,18 @@
 <template>
 	<view>
 		
-		<view class="divcs">
-		  <view class="div" v-for="s in arr">
+		<view class="divcs" v-if="bm_status">
+		  <view class="div" v-for="s in bm_res">
 		    <view class="img">
-		      <image :src="s.src"></image>
+		      <image :src="s.pic"></image>
 		    </view>
 		    <view class="text">
-		      <text class="t1">{{s.txt}}</text>
-		      <text>￥{{s.money}}</text>
+		      <text class="t1">{{s.name}}</text>
+		      <text>￥{{s.price}}</text>
 		    </view>
 		  </view>
 		</view>
+		<view class="divcs" v-else><text>{{bm_res}}</text></view>
 		
 	</view>
 </template>
@@ -20,14 +21,33 @@
 	export default {
 		data() {
 			return {
-				arr: [
-				  { src: "../../static/img/kaochang.png", txt: "考场考场考场考场考场考场", money: "999" },
-				  { src: "../../static/img/kaochang.png", txt: "考场考场考场考场考场考场", money: "999" },
-				]
+				bm_status:true,
+				bm_res: []
 			}
 		},
+		onLoad() {
+			this.get_baoming();
+		},
 		methods: {
-			
+			get_baoming(){
+				var url = this.$url;
+				uni.request({
+					url:url+'Index/student_baoming',
+					data:{
+						student_id:2,
+						type:2
+					},
+					method:'POST',
+					success:(e)=>{
+						if(e.data.error == 200){
+							this.bm_res = e.data.data;
+						}else if(e.data.error == 400){
+							this.bm_status = false;
+							this.bm_res = e.data.info;
+						}
+					}
+				})
+			}
 		}
 	}
 </script>

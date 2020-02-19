@@ -6,11 +6,12 @@
 		</view>
 		
 		<view class="lunbo">
-			<uni-swiper-dot :info="info" :current="current" :mode="mode" :dots-styles="dotsStyles">
+			<uni-swiper-dot :current="current" :mode="mode" :dots-styles="dotsStyles">
 				<swiper class="swiper-box u-wrp-bnr" @change="change">
-					<swiper-item v-for="(item ,index) in info" :key="index">
+					<!-- <swiper-item v-for="(item ,index) in info" :key="index"> -->
+					<swiper-item>
 						<view class="swiper-item">
-							<image :src="item.url" class='u-img-slide' mode="aspectFill" />
+							<image :src="detail.pic" class='u-img-slide' mode="aspectFill" />
 						</view>
 					</swiper-item>
 				</swiper>

@@ -5,7 +5,7 @@
 		  <text>今日首推</text>
 		  <view class="divcs">
 			<view class="width">
-			  <view class="div" v-for="(v,i) in position_room">
+			  <view class="div" v-for="(v,i) in position_room" :data-id="v.id" @click="room_detail">
 				<image :src="v.pic"></image>
 				<text>{{v.title}}</text>
 				<view class="txt">
@@ -23,7 +23,7 @@
 		<view class="end">
 		  <text>当前热门</text>
 		  <view class="divcs">
-			<view class="div" v-for="(v,i) in hot_room">
+			<view class="div" v-for="(v,i) in hot_room" :data-id="v.id" @click="room_detail">
 				<image :src="v.pic"></image>
 				<text>{{v.title}}</text>
 				<view class="txt">
@@ -63,6 +63,12 @@
 			this.gethot_room();
 		},
 		methods: {
+			room_detail(e){
+				var id = e.currentTarget.dataset.id;
+				uni.navigateTo({
+					url:'/pages/kaochangs/index?id='+id
+				})
+			},
 			/* 
 				今日首推考场
 			 */

@@ -2,14 +2,15 @@
 	<view>
 		
 		<view class="top">
-		  <text>庆华考场</text>
+		  <text>{{school_detail.name}}</text>
 		</view>
 		<view class="lunbo">
-			<uni-swiper-dot :info="info" :current="current" :mode="mode" :dots-styles="dotsStyles">
+			<uni-swiper-dot  :current="current" :mode="mode" :dots-styles="dotsStyles">
 				<swiper class="swiper-box u-wrp-bnr" @change="change">
-					<swiper-item v-for="(item ,index) in info" :key="index">
+					<!-- <swiper-item v-for="(item ,index) in info" :key="index"> -->
+					<swiper-item>
 						<view class="swiper-item">
-							<image :src="item.url" class='u-img-slide' mode="aspectFill" />
+							<image :src="school_detail.pic" class='u-img-slide' mode="aspectFill" />
 						</view>
 					</swiper-item>
 				</swiper>
@@ -25,8 +26,8 @@
 		
 		<view class="main">
 		  <view class="kaochang">
-			<text class="t1">考场信息</text>
-			<text class="t2">庆华考场乍地一万三千多平方米，单词可容纳考生9000余次庆华考场乍地一万三千多平方米，单词可容纳考生9000余次</text>
+			<text class="t1">驾校信息</text>
+			<text class="t2">{{school_detail.description}}</text>
 		  </view>
 		  <view class="baoming">
 			<text>报名提交</text>
@@ -79,6 +80,7 @@
 		},
 		data() {
 			return {
+				school_detail:'',
 				current: 0,
 				mode: 'default',
 				dotsStyles: {},
@@ -95,8 +97,42 @@
 				],
 			}
 		},
+		onLoad(options) {
+			var id = options.id;
+			this.get_school_detail(id)
+		},
 		methods: {
-			
+			get_school_detail(id){
+				var url = this.$url;
+				uni.request({
+					url:url+'Index/school_detail',
+					data:{
+						school_id:id
+					},
+					method:'POST',
+					success: (e) => {
+						if(e.data.error == 400){
+							uni.showModal({
+								title:'提示',
+								content:e.data.info,
+								success:function(res){
+									if(res.confirm){
+										uni.navigateBack({
+										    delta: 2
+										});
+									}else if(res.cancel){
+										uni.navigateBack({
+										    delta: 2
+										});
+									}
+								}
+							})
+						}else if(e.data.error == 200){
+							this.school_detail = e.data.data;
+						}
+					}
+				})
+			}
 		}
 	}
 </script>

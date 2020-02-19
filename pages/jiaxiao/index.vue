@@ -17,7 +17,7 @@
 		</view>
 		
 		<view class="divcs">
-		  <view class="div" v-for="(v,i) in school_res">
+		  <view class="div" v-for="(v,i) in school_res" :data-id="v.id" @click="school_detail">
 			<image :src="v.pic"></image>
 			<view class="txt">
 			  <text class="t1">{{v.name}}</text>
@@ -53,7 +53,12 @@
 			this.getdriving_school();
 		},
 		methods: {
-			
+			school_detail(e){
+				var id = e.currentTarget.dataset.id;
+				uni.navigateTo({
+					url:'/pages/jiaxiaos/index?id='+id
+				})
+			},
 			  choosesort1: function (e) {
 			    if (this.data.daindex1 == 0) {
 			      this.setData({
