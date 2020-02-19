@@ -1,8 +1,8 @@
 <template>
 	<view>
-		<view class="head">
+		<!-- <view class="head">
 		  <text>招生素材</text>
-		</view>
+		</view> -->
 		
 		<view class="top">
 		  <view class="search">
@@ -59,7 +59,6 @@
 </template>
 
 <script>
-	import Header from '../../components/header.vue'
 	export default {
 		data() {
 			return {

@@ -1,0 +1,1 @@
+<view><view class="divcs"><block wx:for="{{arr}}" wx:for-item="s" wx:for-index="__i0__"><view class="div"><view class="img"><image src="{{s.src}}"></image></view><view class="text"><text class="t1">{{s.txt}}</text><text>{{"￥"+s.money}}</text></view></view></block></view></view>

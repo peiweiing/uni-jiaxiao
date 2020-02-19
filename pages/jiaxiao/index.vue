@@ -1,11 +1,6 @@
 <template>
 	<view>
 		
-		<view class="head">
-		  <Header :text="驾校详情">
-		  </Header>
-		</view>
-		
 		<view class='sort-wrap'>
 		  <view class='sort-btn' data-index="daindex1" @click="choosesort1">
 			推荐排序
@@ -36,7 +31,6 @@
 </template>
 
 <script>
-	import Header from '../../components/header.vue'
 	export default {
 		data() {
 			return {
@@ -48,6 +42,7 @@
 				daindex3: 0,
 				school_status: true,
 				arr:[
+					{src:'../../static/img/kaochang.png/',txt:'鹏程驾校报名费1888全程无忧等等',text:'硼砂发动快速了解士大夫是打开链接',money:'999'},
 					{src:'../../static/img/kaochang.png/',txt:'鹏程驾校报名费1888全程无忧等等',text:'硼砂发动快速了解士大夫是打开链接',money:'999'},
 					{src:'../../static/img/kaochang.png/',txt:'鹏程驾校报名费1888全程无忧等等',text:'硼砂发动快速了解士大夫是打开链接',money:'999'},
 				]

@@ -42,7 +42,7 @@
 		</view>
 		
 		<view class="divcs">
-		  <view class="div" v-for="(v,i) in arr" @click="icon(url)">
+		  <view class="div" v-for="(v,i) in arr" @click="icon(v.url)">
 			<image :src="v.src"></image>
 			<text>{{v.txt}}</text>
 		  </view>
@@ -85,7 +85,7 @@
 <style>
 	.container{
 	  background-color: greenyellow;
-	  /* background-image: url("../../static/img/bgc.png"); */
+	  background-image: url("../../static/img/bgc.png");
 	}
 	.userinfo {
 	  display: flex; 

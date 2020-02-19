@@ -3,40 +3,74 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationStyle":"custom"
 			}
 		}
 	    ,{
             "path" : "pages/details/index",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "详情"
+			}
         }
         ,{
             "path" : "pages/forum/index",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "招生素材"
+			}
         }
         ,{
             "path" : "pages/user/index",
-            "style" : {}
+            "style" : {
+				"navigationStyle":"custom"
+			}
+        }
+        ,{
+            "path" : "pages/ubaoming/index",
+            "style" : {
+				"navigationBarTitleText": "我的报名"
+			}
+        }
+        ,{
+            "path" : "pages/ushoucang/index",
+            "style" : {
+				"navigationBarTitleText": "我的收藏"
+			}
+        }
+        ,{
+            "path" : "pages/uyueke/index",
+            "style" : {
+				"navigationBarTitleText": "我的约课"
+			}
         }
         ,{
             "path" : "pages/kaochang/index",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "考场详情"
+			}
         }
         ,{
             "path" : "pages/kaochangs/index",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "考试场地"
+			}
         }
         ,{
             "path" : "pages/jiaxiao/index",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "驾校详情"
+			}
         }
         ,{
             "path" : "pages/jiaxiaos/index",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "驾校场地"
+			}
         }
         ,{
-            "path" : "pages/log/index",
-            "style" : {}
+            "path" : "pages/info/index",
+            "style" : {
+				"navigationBarTitleText": "消息"
+			}
         }
     ],
 	"globalStyle": {
@@ -64,7 +98,7 @@
 				"text": "论坛"
 			},
 			{
-				"pagePath": "pages/log/index",
+				"pagePath": "pages/info/index",
 				"iconPath": "static/logo.png",
 				"selectedIconPath": "static/logo.png",
 				"text": "消息"

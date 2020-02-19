@@ -1,11 +1,6 @@
 <template>
 	<view>
 		
-		<view class="head">
-		  <Header :text="考场详情">
-		  </Header>
-		</view>
-		
 		<view class="top">
 		  <text>今日首推</text>
 		  <view class="divcs">
@@ -46,15 +41,16 @@
 </template>
 
 <script>
-	import Header from '../../components/header.vue'
 	export default {
 		data() {
 			return {
 				arra:[
 					{src:'../../static/img/lunbo.png',txt:'清华考场明日可约学员200人次',money:'999'},
 					{src:'../../static/img/lunbo.png',txt:'清华考场明日可约学员200人次',money:'999'},
+					{src:'../../static/img/lunbo.png',txt:'清华考场明日可约学员200人次',money:'999'},
 				],
 				arrb:[
+					{src:'../../static/img/kaochang.png',txt:'清华考场明日可约学员200人次',money:'999'},
 					{src:'../../static/img/kaochang.png',txt:'清华考场明日可约学员200人次',money:'999'},
 					{src:'../../static/img/kaochang.png',txt:'清华考场明日可约学员200人次',money:'999'},
 				]
@@ -77,16 +73,19 @@
 }
 .top .divcs{
   overflow: auto;
+  height: 400rpx;
 }
 .top .divcs .width{
   width: 1200px;
   height: 390rpx;
+  overflow: hidden;
 }
 .top .divcs .div{
   float: left;
   width: 600rpx;
   height: 380rpx;
   margin-right: 20rpx;
+  margin-bottom: 20rpx;
   border-radius: 30rpx;
   box-shadow: 0 2px 2px #80ffff;
 }

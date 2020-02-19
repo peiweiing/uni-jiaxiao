@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "考试场地",
+  "usingComponents": {
+    "uni-swiper-dot": "/components/uni-swiper-dot/uni-swiper-dot"
+  }
+}

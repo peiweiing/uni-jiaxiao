@@ -1,9 +1,5 @@
 <template>
 	<view>
-		<view class="head">
-		  <Header :text="详情">
-		  </Header>
-		</view>
 		
 		<view class="top">
 		  <view class="logo">
@@ -47,7 +43,7 @@
 		<view>
 			<uni-segmented-control :current="current" :values="items" :style-type="button" @clickItem="onClickItem" />
 		</view>
-		<view>
+		<view class="ment">
 			<view v-show="current === 0">
 				这是1
 			</view>
@@ -58,7 +54,7 @@
 		
 		<view class="foot">
 		  <view class="end">
-			<text class="arrow" bintap="onforum"></text>
+			<text class="arrow" @click="goback"></text>
 			<input placeholder="来说说我的看法..."></input>
 			<image src="../../static/img/xfenxiang.png"></image>
 			<image src="../../static/img/xshoucang.png"></image>
@@ -69,11 +65,9 @@
 </template>
 
 <script>
-	import Header from '../../components/header.vue'
 	import uniSegmentedControl from '@/components/uni-segmented-control/uni-segmented-control.vue'
 	export default {
 		components:{
-			Header,
 			uniSegmentedControl
 		},
 		data() {
@@ -86,6 +80,9 @@
 			}
 		},
 		methods: {
+			goback() {
+                this.$router.go(-1);
+			},
 			onClickItem(index) {
 				if (this.current !== index) {
 					this.current = index
@@ -163,6 +160,9 @@
 	  font-size: 12px;
 	}
 
+	.ment{
+		min-height: 500rpx;
+	}
 	.foot{
 	  position: sticky;
 	  bottom: 0;

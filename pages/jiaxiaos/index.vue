@@ -1,16 +1,19 @@
 <template>
 	<view>
 		
-		<view class="head">
-		  <Header :text="驾校场地">
-		  </Header>
-		</view>
-		
 		<view class="top">
 		  <text>庆华考场</text>
 		</view>
 		<view class="lunbo">
-			
+			<uni-swiper-dot :info="info" :current="current" :mode="mode" :dots-styles="dotsStyles">
+				<swiper class="swiper-box u-wrp-bnr" @change="change">
+					<swiper-item v-for="(item ,index) in info" :key="index">
+						<view class="swiper-item">
+							<image :src="item.url" class='u-img-slide' mode="aspectFill" />
+						</view>
+					</swiper-item>
+				</swiper>
+			</uni-swiper-dot>
 		</view>
 		
 		<view class="icon">
@@ -69,11 +72,17 @@
 </template>
 
 <script>
-	import Header from '../../components/header.vue'
+	import uniSwiperDot from '@/components/uni-swiper-dot/uni-swiper-dot.vue'
 	export default {
+		components:{
+			uniSwiperDot
+		},
 		data() {
 			return {
-				"bnrUrl": [
+				current: 0,
+				mode: 'default',
+				dotsStyles: {},
+				info: [
 				  { "url": "../../static/img/lunbo.png" },
 				  { "url": "../../static/img/lunbo.png" },
 				  { "url": "../../static/img/lunbo.png" },

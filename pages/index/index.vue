@@ -16,34 +16,48 @@
 		  </view>
 		</view>
 		<view class="lunbo">
-					<view class="page-section-spacing u-wrp-bnr">
+			<uni-swiper-dot :info="info" :current="current" :mode="mode" :dots-styles="dotsStyles">
+				<swiper class="swiper-box u-wrp-bnr" @change="change">
+					<swiper-item v-for="(item ,index) in info" :key="index">
+						<view class="swiper-item">
+							<image :src="item.url" class='u-img-slide' mode="aspectFill" />
+						</view>
+					</swiper-item>
+				</swiper>
+			</uni-swiper-dot>
+			
+					<!-- <view class="page-section-spacing u-wrp-bnr">
 						<swiper class="swiper" indicatorDots:true autoplay:true interval:2000 duration:500>
 							<swiper-item v-for="(v,i) in lunbo" :key="i">
 								<image :src="v.src" class='u-img-slide'></image>
 							</swiper-item>
 						</swiper>
-					</view>
+					</view> -->
 		</view>
 		<view class="icon w100 flex">
 		  <view class="ico w4" v-for="(v,i) in icon">
 			<image :src="v.src"></image>
-			<text>{{v.txt}}</text>
+			<text class="txt">{{v.txt}}</text>
 		  </view>
 		</view>
 		
 		<view class="div">
-			<text @click="kaochang">考场推荐</text>
+			<text class="txt" @click="kaochang">考场推荐</text>
 			<view class="divcs">
-				<view v-for="(v,i) in arra" @click="kaochangs">
-					<image :src="v.src"></image>
+				<view class="width">
+					<view v-for="(v,i) in arra" @click="kaochangs">
+						<image class="img" :src="v.src"></image>
+					</view>
 				</view>
 			</view>
 		</view>
 		<view class="div">
-			<text @click="jiaxiao">驾校推荐</text>
+			<text class="txt" @click="jiaxiao">驾校推荐</text>
 			<view class="divcs">
-				<view v-for="(v,i) in arrb" @click="jiaxiaos">
-					<image :src="v.src"></image>
+				<view class="width">
+					<view v-for="(v,i) in arrb" @click="jiaxiaos">
+						<image class="img" :src="v.src"></image>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -52,19 +66,28 @@
 </template>
 
 <script>
-import Swiper from '../../components/swiper.vue'
+	import uniSwiperDot from '@/components/uni-swiper-dot/uni-swiper-dot.vue'
+
 	export default {
-		components:{
-			Swiper,
+		components: {
+			uniSwiperDot
 		},
 		data() {
 			return {
 				title: 'Hello',
-				lunbo:[
-					{src:'../../static/img/lunbo.png'},
-					{src:'../../static/img/lunbo.png'},
-					{src:'../../static/img/lunbo.png'},
+				current: 0,
+				mode: 'default',
+				dotsStyles: {},
+				info: [
+					{url: '../../static/img/lunbo.png',},
+					{url: '../../static/img/lunbo.png',},
+					{url: '../../static/img/lunbo.png',}
 				],
+				// lunbo:[
+				// 	{src:'../../static/img/lunbo.png'},
+				// 	{src:'../../static/img/lunbo.png'},
+				// 	{src:'../../static/img/lunbo.png'},
+				// ],
 				icon:[
 					{src:'../../static/img/xiao.png',txt:'考场详情',url:''},
 					{src:'../../static/img/xiao.png',txt:'考场详情',url:''},
@@ -87,6 +110,9 @@ import Swiper from '../../components/swiper.vue'
 
 		},
 		methods: {
+			change(e) {
+				this.current = e.detail.current
+			},
 			kaochang(){
 				uni.navigateTo({
 					url: '/pages/kaochang/index'
@@ -168,14 +194,20 @@ import Swiper from '../../components/swiper.vue'
 	  flex-flow: column;
 	  align-items: center;
 	}
+	.ico .txt{
+		display: inline-block;
+		margin-top: 10rpx;
+	}
 	.divcs{
 	  overflow: auto;
 	  height: 200rpx;
 	}
-	.divcs view{
+	.divcs .width{
 	  width: 1200rpx;
+	  height: 190rpx;
+	  overflow: hidden;
 	}
-	.divcs image{
+	.divcs .img{
 	  width: 260rpx;
 	  height: 180rpx;
 	  float: left;
@@ -184,5 +216,9 @@ import Swiper from '../../components/swiper.vue'
 	}
 	.div{
 	  margin: 1rem;
+	}
+	.div .txt{
+		display: inline-block;
+		margin-bottom: 10rpx;
 	}
 </style>
