@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="por">
 		<!-- <view class="head">
 		  <text>招生素材</text>
 		</view> -->
@@ -13,11 +13,14 @@
 		</view>
 		
 		<view class="icon">
-		  <view v-for="(v,i) in arr" :key="i">
-			<image :src="v.src"></image>
-			<text>{{v.txt}}</text>
-		  </view>
+			<navigator v-for="(v,i) in arr" :key="i" :url="v.url">
+			  <view>
+				<image :src="v.src"></image>
+				<text>{{v.txt}}</text>
+			  </view>
+			</navigator>
 		</view>
+		
 		<view class="div" v-for="(v,i) in article_res" :key="i">
 		  <view class="divtop" :data-id="v.id" @click="ondetails">
 			<view class="one">
@@ -44,7 +47,7 @@
 			  <image src="../../static/img/xchakan.png"></image>
 			  <text>{{chakan}}</text>
 			</view>
-			<view>
+			<view @click="msg">
 			  <image src="../../static/img/xpinglun.png"></image>
 			  <text>评论</text>
 			</view>
@@ -55,6 +58,17 @@
 		  </view>
 		</view>
 		
+		<view class="zhezhao" v-show="msgshow" @click="zhezhaoshow">
+			<view class="pinglun" @click.stop>
+				<view class="inp">
+					<input type="text" value="" />
+				</view>
+				<view class="but">
+					<text @click="hide(event)">取消</text>
+					<button type="primary" @click="publish">发布</button>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -62,12 +76,13 @@
 	export default {
 		data() {
 			return {
+				msgshow:"flase",
 				chakan:"0",
 				arr:[
 				  { src: "../../static/img/quanbu.png", txt: "全部", url: "" },
 				  { src: "../../static/img/xiaoxizhongxin.png", txt: "招生素材", url: "" },
 				  { src: "../../static/img/kechengbaoming.png", txt: "报名", url: "" },
-				  { src: "../../static/img/fatie.png", txt: "发帖", url: "" },
+				  { src: "../../static/img/fatie.png", txt: "发帖", url: "../newRelease/index" },
 				],
 				main:[
 				  { title: "大新县驾驶培训有限公司", ttsrc: "../../static/img/logo.png", h1: "大新科目一注意事项", text: "科目一、学员注意事项，各位学员请注意，下面宣读一些考生须知，请大家保持安静", time: "2019-12-12", butt: "考试须知", },
@@ -88,7 +103,21 @@
 			this.getarticle_result();
 		},
 		methods: {
+			msg(){
+				thi.msgshow = true;
+				this.focus = true;
+			},
+			hide:function(event){
+				this.msgshow = false
+			},
+			zhezhaoshow(){
+				this.msgshow = false
+			},
+			publish(){
+				
+			},
 			ondetails(e){
+				chakan++;
 				var id = e.currentTarget.dataset.id;
 				uni.navigateTo({
 					url: '/pages/details/index?id='+id
@@ -113,6 +142,53 @@
 </script>
 
 <style>
+	.zhezhao{
+		/* display: none; */
+		width: 100%;
+		height: 90vh;
+		position: absolute;
+		top: 0;
+		background-color: #555555;
+	}
+	.pinglun{
+		width: 100%;
+		position: absolute;
+		bottom: 50rpx;
+		padding: 20rpx;
+		background-color: #fff;
+		box-sizing: border-box;
+	}
+	.pinglun .inp{
+		min-height: 100rpx;
+		border: 1px solid #AAAAAA;
+		background-color: #F1F1F1;
+		margin: 0 20rpx;
+	}
+	.pinglun .inp input{
+		display: flex;
+		flex-wrap: wrap;
+		width: 100%;
+		min-height: 100rpx;
+	}
+	.pinglun .but{
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		margin: 20rpx 20rpx 0;
+	}
+	.pinglun .but text{
+		font-size: 16px;
+		margin-right: 40rpx;
+	}
+	.pinglun .but button{
+		height: 80rpx;
+		line-height: 80rpx;
+		margin: 0;
+		padding: 0 40rpx;
+		border-radius: 40rpx;
+	}
+	
+	
 	.head{
 	  line-height: 8vh;
 	  padding-left: 30rpx;
@@ -154,7 +230,7 @@
 	  width: 70rpx;
 	  height: 70rpx;
 	}
-	.icon>view{
+	.icon view{
 	  display: flex;
 	  flex-flow: column;
 	  align-items: center;

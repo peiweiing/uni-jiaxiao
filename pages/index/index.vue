@@ -1,11 +1,10 @@
 <template>
 	<view>
-		<view class="boxTop">
-			
-		</view>
+		<!-- <view class="boxTop">
+		</view> -->
 		<view class="top">
 		  <view class="site">
-			<image src="../../static/img/shoucang.png"></image>
+			<image src="../../static/img/weizhi.png"></image>
 			<text>西安</text>
 		  </view>
 		  <view class="search">
@@ -42,7 +41,10 @@
 		</view>
 		
 		<view class="div">
-			<text class="txt" @click="kaochang">考场推荐</text>
+			<view class="mores">
+				<text class="txt">考场推荐</text>
+				<text class="more" @click="kaochang">更多</text>
+			</view>
 			<view class="divcs" v-if="room_status">
 				<view class="width">
 					<view v-for="(v,i) in arra" :data-id="v.id" @click="kaochangs">
@@ -53,7 +55,10 @@
 			<view class="divcs" v-else><text>{{arra}}</text></view>
 		</view>
 		<view class="div">
-			<text class="txt" @click="jiaxiao">驾校推荐</text>
+			<view class="mores">
+				<text class="txt">驾校推荐</text>
+				<text class="more" @click="jiaxiao">更多</text>
+			</view>
 			<view class="divcs" v-if="school_status">
 				<view class="width">
 					<view v-for="(v,i) in arrb" @click="jiaxiaos">
@@ -199,13 +204,18 @@
 
 <style>
 	.top{
-	  
+		padding-top: 30rpx;
+		padding-bottom: 20rpx;
+	  background: url('../../static/img/site.png') no-repeat top;
+	  background-size: 100% 200%;
 	}
 	.top .site{
 	  height: 8vh;
 	  display: flex;
 	  justify-content: flex-end;
 	  align-items: center;
+	  padding-right: 20rpx;
+	  color: #fff;
 	}
 	.top .site image{
 	  width: 50rpx;
@@ -216,12 +226,13 @@
 	  justify-content: center;
 	}
 	.search view{
-	  height: 70rpx;
-	  display: flex;
-	  justify-content: center;
-	  align-items: center;
-	  border-radius: 30rpx;
-	  box-shadow: 0 0 2px #ccc;
+		height: 70rpx;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 30rpx;
+		box-shadow: 0 0 2px #ccc;
+		background-color: #fff;
 	}
 	.search image{
 	  width: 50rpx;
@@ -240,11 +251,13 @@
 	.u-img-slide {
 	  width: 100%;
 	  height: 340rpx;
+	  border-radius: 40rpx;
 	}
 
 	.icon image{
 	  width: 100rpx;
 	  height: 100rpx;
+	  border-radius: 40rpx;
 	}
 	.ico{
 	  display: flex;
@@ -274,8 +287,17 @@
 	.div{
 	  margin: 1rem;
 	}
+	.div .mores{
+		display: flex;
+		justify-content: space-between;
+	}
 	.div .txt{
 		display: inline-block;
 		margin-bottom: 10rpx;
+		border-left: 5rpx solid rgb(64,232,119);
+		padding-left: 10rpx;
+	}
+	.div .more{
+		color: red;
 	}
 </style>

@@ -42,10 +42,12 @@
 		</view>
 		
 		<view class="divcs">
-		  <view class="div" v-for="(v,i) in arr" @click="icon(v.url)">
-			<image :src="v.src"></image>
-			<text>{{v.txt}}</text>
-		  </view>
+			<navigator v-for="(v,i) in arr" :url="v.url">
+			  <view class="div">
+				<image :src="v.src"></image>
+				<text>{{v.txt}}</text>
+			  </view>
+			</navigator>
 		</view>
 		
 		<view class="divcss">
@@ -75,17 +77,16 @@
 			}
 		},
 		methods: {
-			icon(url){
-				this.$router.push(url)
-			},
+			
 		}
 	}
 </script>
 
 <style>
 	.container{
-	  background-color: greenyellow;
-	  background-image: url("../../static/img/bgc.png");
+	  /* background-color: greenyellow; */
+	  background: url("../../static/img/bgc.png") no-repeat top;
+	  background-size: 100% 80%;
 	}
 	.userinfo {
 	  display: flex; 
@@ -142,7 +143,6 @@
 	  display: flex;
 	  justify-content: space-around;
 	  padding: 30rpx 0 50rpx;
-	  background-color: #fff;
 	}
 	.usericon>view{
 	  display: flex;

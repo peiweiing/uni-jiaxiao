@@ -33,7 +33,7 @@
 
 /* html{font-size: 26.67vw;} */
 page,._ol,._ul,._h1,._h2,._h3,._h4,._h5,._h6,._p,._th,._td,._dl,._dd,form,._fieldset,._legend,input,textarea,._select{margin:0;padding:0;}
-page{font-size:0.1rem;background:#fff;}
+page{font-size:14px;background:#fff;}
 ._a{color:#172c45;text-decoration:none;}
 ._a:hover{color:#cd0200;text-decoration:underline;}
 ._ul,._ol,._li{list-style:none;}

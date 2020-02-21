@@ -1,33 +1,76 @@
 <template>
 	<view>
 		
-		<view class="divcs">
-		  <view class="div" v-for="s in arr">
-		    <view class="img">
-		      <image :src="s.src"></image>
-		    </view>
-		    <view class="text">
-		      <text class="t1">{{s.txt}}</text>
-		      <text>￥{{s.money}}</text>
-		    </view>
-		  </view>
+		<view>
+			<uni-segmented-control :current="current" :values="items" :style-type="button" @clickItem="onClickItem" />
 		</view>
+		<view class="ment">
+			<view v-show="current === 0">
+				
+				<view class="divcs">
+				  <view class="div" v-for="s in arr">
+					<view class="img">
+					  <image :src="s.src"></image>
+					</view>
+					<view class="text">
+					  <text class="t1">{{s.txt}}</text>
+					  <text>￥{{s.money}}</text>
+					</view>
+				  </view>
+				</view>
+				
+			</view>
+			<view v-show="current === 1">
+				
+				<view class="divcs">
+				  <view class="div" v-for="s in brr">
+					<view class="img">
+					  <image :src="s.src"></image>
+					</view>
+					<view class="text">
+					  <text class="t1">{{s.txt}}</text>
+					  <text>￥{{s.money}}</text>
+					</view>
+				  </view>
+				</view>
+				
+			</view>
+		</view>
+		
 		
 	</view>
 </template>
 
 <script>
+	import uniSegmentedControl from '@/components/uni-segmented-control/uni-segmented-control.vue'
 	export default {
+		components:{
+			uniSegmentedControl
+		},
 		data() {
 			return {
+				current: 0,
+				items: [
+					'驾校报名',
+					'考场报名'
+				],
 				arr: [
-				  { src: "../../static/img/kaochang.png", txt: "考场考场考场考场考场考场", money: "999" },
-				  { src: "../../static/img/kaochang.png", txt: "考场考场考场考场考场考场", money: "999" },
-				]
+				  { src: "../../static/img/kaochang.png", txt: "考场考场考场考场考场考场", money: "111" },
+				  { src: "../../static/img/kaochang.png", txt: "考场考场考场考场考场考场", money: "111" },
+				],
+				brr: [
+				  { src: "../../static/img/kaochang.png", txt: "考场考场考场考场考场考场", money: "222" },
+				  { src: "../../static/img/kaochang.png", txt: "考场考场考场考场考场考场", money: "222" },
+				],
+				
 			}
 		},
 		methods: {
-			
+			onClickItem(index) {
+				if (this.current !== index) {
+					this.current = index
+				}
+			},
 		}
 	}
 </script>

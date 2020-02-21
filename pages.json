@@ -72,6 +72,10 @@
 				"navigationBarTitleText": "消息"
 			}
         }
+        ,{
+            "path" : "pages/newRelease/index",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

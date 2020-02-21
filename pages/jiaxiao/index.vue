@@ -4,15 +4,15 @@
 		<view class='sort-wrap'>
 		  <view class='sort-btn' data-index="daindex1" @click="choosesort1">
 			推荐排序
-			<image :src="imageurl1"></image>
+			<image :src="bool1?imageurl1:imageurl2"></image>
 		  </view>
 		  <view class='sort-btn' data-index="daindex2" @click="choosesort2">
 			距离优先
-			<image :src="imageurl2"></image>
+			<image :src="bool2?imageurl1:imageurl2"></image>
 		  </view>
 		  <view class='sort-btn' data-index="daindex3" @click="choosesort3">
 			价格优先
-			<image :src="imageurl3"></image>
+			<image :src="bool3?imageurl1:imageurl2"></image>
 		  </view>
 		</view>
 		
@@ -35,12 +35,15 @@
 		data() {
 			return {
 				school_res:[],
+				bool1:true,
+				bool2:true,
+				bool3:true,
 				imageurl1: "../../static/img/xiangxia.png",
-				daindex1: 0,
-				imageurl2: "../../static/img/xiangxia.png",
-				daindex2: 0,
-				imageurl3: "../../static/img/xiangxia.png",
-				daindex3: 0,
+				imageurl2: "../../static/img/xiangshang.png",
+				// imageurl3: "../../static/img/xiangxia.png",
+				// daindex1: 0,
+				// daindex2: 0,
+				// daindex3: 0,
 				school_status: true,
 				arr:[
 					{src:'../../static/img/kaochang.png/',txt:'鹏程驾校报名费1888全程无忧等等',text:'硼砂发动快速了解士大夫是打开链接',money:'999'},
@@ -55,43 +58,25 @@
 		methods: {
 			
 			  choosesort1: function (e) {
-			    if (this.data.daindex1 == 0) {
-			      this.setData({
-			        imageurl1: "../../img/xiangshang.png",
-			        daindex1: 1
-			      })
-			    } else {
-			      this.setData({
-			        imageurl1: "../../img/xiangxia.png",
-			        daindex1: 0
-			      })
-			    }
+				if (this.bool1 !== false) {
+					this.bool1 = false
+				}else{
+					this.bool1=true
+				}
 			  },
 			  choosesort2: function (e) {
-			    if (this.data.daindex2 == 0) {
-			      this.setData({
-			        imageurl2: "../../img/xiangshang.png",
-			        daindex2: 1
-			      })
-			    } else {
-			      this.setData({
-			        imageurl2: "../../img/xiangxia.png",
-			        daindex2: 0
-			      })
-			    }
+				if (this.bool2 !== false) {
+					this.bool2 = false
+				}else{
+					this.bool2=true
+				}
 			  },
 			  choosesort3: function (e) {
-			    if (this.data.daindex3 == 0) {
-			      this.setData({
-			        imageurl3: "../../img/xiangshang.png",
-			        daindex3: 1
-			      })
-			    } else {
-			      this.setData({
-			        imageurl3: "../../img/xiangxia.png",
-			        daindex3: 0
-			      })
-			    }
+				if (this.bool3 !== false) {
+					this.bool3 = false
+				}else{
+					this.bool3=true
+				}
 			  },
 			  getdriving_school(){
 				  var url = this.$url;
