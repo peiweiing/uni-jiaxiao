@@ -5,7 +5,7 @@
 			<uni-segmented-control :current="current" :values="items" :style-type="button" @clickItem="onClickItem" />
 		</view>
 		<view class="ment">
-			<view v-show="current === 0">
+			<!-- <view v-show="current === 0">
 				
 				<view class="divcs">
 				  <view class="div" v-for="s in arr">
@@ -34,7 +34,7 @@
 				  </view>
 				</view>
 				
-			</view>
+			</view> -->
 		</view>
 		
 		<view class="divcs" v-if="bm_status">
@@ -80,21 +80,26 @@
 			}
 		},
 		onLoad() {
-			this.get_baoming();
+			this.get_baoming(2);
 		},
 		methods: {
 			onClickItem(index) {
+				if(index == 0){
+					this.get_baoming(2)
+				}else{
+					this.get_baoming(1);
+				}
 				if (this.current !== index) {
 					this.current = index
 				}
 			},
-			get_baoming(){
+			get_baoming(type){
 				var url = this.$url;
 				uni.request({
 					url:url+'Index/student_baoming',
 					data:{
 						student_id:2,
-						type:2
+						type:type
 					},
 					method:'POST',
 					success:(e)=>{
