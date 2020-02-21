@@ -143,7 +143,7 @@
 
 <style>
 	.zhezhao{
-		/* display: none; */
+		display: none;
 		width: 100%;
 		height: 90vh;
 		position: absolute;
