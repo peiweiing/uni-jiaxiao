@@ -15,11 +15,11 @@
 		  </view>
 		</view>
 		<view class="lunbo">
-			<uni-swiper-dot :info="info" :current="current" :mode="mode" :dots-styles="dotsStyles">
+			<uni-swiper-dot :info="lunbo" :current="current" :mode="mode" :dots-styles="dotsStyles">
 				<swiper class="swiper-box u-wrp-bnr" @change="change">
-					<swiper-item v-for="(item ,index) in info" :key="index">
+					<swiper-item v-for="(item ,index) in lunbo" :key="index">
 						<view class="swiper-item">
-							<image :src="item.url" class='u-img-slide' mode="aspectFill" />
+							<image :src="item.pic" class='u-img-slide' mode="aspectFill" />
 						</view>
 					</swiper-item>
 				</swiper>
@@ -61,7 +61,7 @@
 			</view>
 			<view class="divcs" v-if="school_status">
 				<view class="width">
-					<view v-for="(v,i) in arrb" @click="jiaxiaos">
+					<view v-for="(v,i) in arrb" :data-id="v.id" @click="jiaxiaos">
 						<image class="img" :src="v.pic"></image>
 					</view>
 				</view>
@@ -140,9 +140,10 @@
 				});
 				
 			},
-			jiaxiaos(){
+			jiaxiaos(e){
+				var id = e.currentTarget.dataset.id;
 				uni.navigateTo({
-					url: '/pages/jiaxiaos/index'
+					url: '/pages/jiaxiaos/index?id='+id
 				});
 				
 			},

@@ -1,17 +1,18 @@
 <template>
 	<view>
 		
-		<view class="divcs">
-		  <view class="div" v-for="s in arr">
+		<view class="divcs" v-if="room_status">
+		  <view class="div" v-for="s in room_res">
 		    <view class="img">
-		      <image :src="s.src"></image>
+		      <image :src="s.pic"></image>
 		    </view>
 		    <view class="text">
-		      <text class="t1">{{s.txt}}</text>
-		      <text class="t2">￥{{s.money}}</text>
+		      <text class="t1">{{s.name}}</text>
+		      <text class="t2">￥{{s.price}}</text>
 		    </view>
 		  </view>
 		</view>
+		<view class="divcs" v-else><text>{{room_res}}</text></view>
 		
 	</view>
 </template>
@@ -20,18 +21,32 @@
 	export default {
 		data() {
 			return {
-				arr:[
-				  { src: "../../static/img/lunbo.png", txt: "考场考场考场考场考场", money: "999" },
-				  { src: "../../static/img/lunbo.png", txt: "考场考场考场考场考场", money: "999" },
-				  { src: "../../static/img/lunbo.png", txt: "考场考场考场考场考场", money: "999" },
-				  { src: "../../static/img/lunbo.png", txt: "考场考场考场考场考场", money: "999" },
-				  { src: "../../static/img/lunbo.png", txt: "考场考场考场考场考场", money: "999" },
-				  { src: "../../static/img/lunbo.png", txt: "考场考场考场考场考场", money: "999" },
-				]
+				room_status:true,
+				room_res:[]
 			}
 		},
+		onLoad() {
+			this.get_collection_room();
+		},
 		methods: {
-			
+			get_collection_room(){
+				var url = this.$url;
+				uni.request({
+					url:url+'Index/collection_room',
+					data:{
+						id:2
+					},
+					method:'POST',
+					success: (e) => {
+						if(e.data.error == 400){
+							this.room_status = false;
+							this.room_res = e.data.info;
+						}else if(e.data.error == 200){
+							this.room_res = e.data.data;
+						}
+					}
+				})
+			}
 		}
 	}
 </script>
