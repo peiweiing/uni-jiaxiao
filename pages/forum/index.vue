@@ -117,7 +117,7 @@
 				
 			},
 			ondetails(e){
-				chakan++;
+				// chakan++;
 				var id = e.currentTarget.dataset.id;
 				uni.navigateTo({
 					url: '/pages/details/index?id='+id
