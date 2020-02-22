@@ -47,6 +47,11 @@
 									uni.navigateBack();
 								}
 							})
+						}else{
+							uni.showToast({
+								title:res.data.info,
+								icon:'none'
+							})
 						}
 					}
 				})
