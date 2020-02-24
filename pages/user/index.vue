@@ -2,7 +2,7 @@
 	<view>
 		<view class="container">
 		  <view class="userinfo">
-			<button> 获取头像昵称 </button>
+			<button @click="login">登录</button>
 			<block>
 			  <image class="userinfo-avatar" mode="cover"></image>
 			  <view>
@@ -77,7 +77,11 @@
 			}
 		},
 		methods: {
-			
+			login(){
+				uni.navigateTo({
+					url: '/pages/mylogin/index'
+				});
+			}
 		}
 	}
 </script>
@@ -85,13 +89,18 @@
 <style>
 	.container{
 	  /* background-color: greenyellow; */
-	  background: url("../../static/img/bgc.png") no-repeat top;
+	  background: url('../../static/img/bgc.png') no-repeat top;
 	  background-size: 100% 80%;
+	  padding-top: 60rpx;
+	  box-sizing: border-box;
 	}
 	.userinfo {
 	  display: flex; 
 	  align-items: center;
 	  margin: 0 50rpx;
+	}
+	.userinfo>button{
+		width: 240rpx;
 	}
 
 	.userinfo>view{
@@ -113,10 +122,10 @@
 	.usertab{
 	  display: flex;
 	  justify-content: space-around;
-	  margin: 110rpx 0 60rpx;
+	  margin: 40rpx 0 40rpx;
 	}
 	.usertab>view{
-	  width: 30%;
+	  width: 28%;
 	  display: flex;
 	  align-items: center;
 	  justify-content: center;
@@ -142,7 +151,7 @@
 	.usericon{
 	  display: flex;
 	  justify-content: space-around;
-	  padding: 30rpx 0 50rpx;
+	  padding: 40rpx 0 20rpx;
 	}
 	.usericon>view{
 	  display: flex;

@@ -20,7 +20,7 @@
         }
         ,{
             "path" : "pages/user/index",
-            "style" : {
+			"style": {
 				"navigationStyle":"custom"
 			}
         }
@@ -74,7 +74,27 @@
         }
         ,{
             "path" : "pages/newRelease/index",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "发帖"
+			}
+        }
+        ,{
+            "path" : "pages/myforget/index",
+            "style" : {
+				"navigationBarTitleText": ""
+			}
+        }
+        ,{
+            "path" : "pages/mylogin/index",
+            "style" : {
+				"navigationBarTitleText": ""
+			}
+        }
+        ,{
+            "path" : "pages/myregister/index",
+            "style" : {
+				"navigationBarTitleText": ""
+			}
         }
     ],
 	"globalStyle": {
