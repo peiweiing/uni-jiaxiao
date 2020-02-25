@@ -6,7 +6,7 @@
             <div class="login">登录</div>
             <div class="logincs">
                 <div class="divcs" style="display: flex;flex-direction: column;">
-
+					
                     <div class="div" style="display: flex;align-items: center;">
                         <img src="../../static/img/login_sj.png" alt="">
                         <input id="userId" :class="dool ? 'inputcs': 'inputcs xiahuared'" type="phone" name="username" placeholder="请输入手机号"  @blur="login()" v-model="username">
@@ -39,6 +39,7 @@
 export default {
     data(){
         return{
+			usertype:1,
             username:"",//登录页面用户名
             userpwd:"",//密码
             // btnbooll:true,//判断输入框内是否有值的真假
@@ -78,7 +79,49 @@ export default {
 			});
         },
         onlogin(){//用户名登录
-            
+			var usertype=this.usertype;
+            var phone=this.username;
+            var password=this.userpwd;
+            var reg=/^1[23456789]\d{9}$/;
+			if(!reg.test(phone)){
+				uni.showToast({
+					title: '手机号码格式错误',
+					icon:'none'
+				});
+				return false;
+			}
+			var plen=password.trim().length;
+			if(plen==0){
+				uni.showToast({
+					title: '请填写密码',
+					icon:'none'
+				});
+				return false;
+			}
+			var url = this.$url;
+								
+			uni.request({
+				url:url+'Login/login',
+				method: 'POST',
+				 header: {
+					'content-type': 'application/x-www-form-urlencoded' //自定义请求头信息
+				},
+				data:{'phone':phone,'password':password,'usertype':usertype},
+				success: (res) => {
+					if(res.data.error==400){
+						uni.showToast({
+							title: res.data.info,
+							icon:'none'
+						});
+					}else{
+						uni.setStorageSync('userinfo',res.data.data);
+						uni.switchTab({
+							url: '/pages/index/index'
+						});
+					}
+					
+				}
+			});
         }
     },
 }
