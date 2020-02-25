@@ -89,16 +89,16 @@
 				current: 0,
 				mode: 'default',
 				dotsStyles: {},
-				info: [
-					{url: '../../static/img/lunbo.png',},
-					{url: '../../static/img/lunbo.png',},
-					{url: '../../static/img/lunbo.png',}
-				],
-				// lunbo:[
-				// 	{src:'../../static/img/lunbo.png'},
-				// 	{src:'../../static/img/lunbo.png'},
-				// 	{src:'../../static/img/lunbo.png'},
+				// info: [
+				// 	{url: '../../static/img/lunbo.png',},
+				// 	{url: '../../static/img/lunbo.png',},
+				// 	{url: '../../static/img/lunbo.png',}
 				// ],
+				lunbo:[
+					{src:'../../static/img/lunbo.png'},
+					{src:'../../static/img/lunbo.png'},
+					{src:'../../static/img/lunbo.png'},
+				],
 				icon:[
 					{src:'../../static/img/xiao.png',txt:'考场详情',url:''},
 					{src:'../../static/img/xiao.png',txt:'考场详情',url:''},

@@ -1,4 +1,58 @@
 
+.zhezhao{
+	display: none;
+	width: 100%;
+	height: 90vh;
+	position: absolute;
+	top: 0;
+	background-color: #555555;
+}
+.pinglun{
+	width: 100%;
+	position: absolute;
+	bottom: 50rpx;
+	padding: 20rpx;
+	background-color: #fff;
+	box-sizing: border-box;
+}
+.pinglun .inp{
+	min-height: 100rpx;
+	border: 1px solid #AAAAAA;
+	background-color: #F1F1F1;
+	margin: 0 20rpx;
+}
+.pinglun .inp input{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-wrap: wrap;
+	        flex-wrap: wrap;
+	width: 100%;
+	min-height: 100rpx;
+}
+.pinglun .but{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: end;
+	-webkit-justify-content: flex-end;
+	        justify-content: flex-end;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	margin: 20rpx 20rpx 0;
+}
+.pinglun .but text{
+	font-size: 16px;
+	margin-right: 40rpx;
+}
+.pinglun .but button{
+	height: 80rpx;
+	line-height: 80rpx;
+	margin: 0;
+	padding: 0 40rpx;
+	border-radius: 40rpx;
+}
 .head{
   line-height: 8vh;
   padding-left: 30rpx;
@@ -53,7 +107,7 @@
   width: 70rpx;
   height: 70rpx;
 }
-.icon>view{
+.icon view{
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -121,6 +175,14 @@
   padding: 10rpx 15rpx;
   border-radius: 30rpx;
   background-color: #ccc;
+}
+.huifuall{
+	padding: 20rpx;
+	background-color: #ccc;
+}
+.huifu1{
+	/* color: #007AFF; */
+	padding-right: 10rpx;
 }
 .divend{
   font-size: 12px;

@@ -157,6 +157,7 @@ export default {
 </script>
 <style scoped>
 	.uni-list{
+		font-size: 16px;
 		display: flex;
 		justify-content: space-around;
 	}

@@ -90,7 +90,7 @@
 	.container{
 	  /* background-color: greenyellow; */
 	  background: url('../../static/img/bgc.png') no-repeat top;
-	  background-size: 100% 80%;
+	  background-size: 100% 160%;
 	  padding-top: 60rpx;
 	  box-sizing: border-box;
 	}

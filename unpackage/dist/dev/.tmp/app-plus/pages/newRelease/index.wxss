@@ -1,0 +1,23 @@
+
+.top{
+	height: 10vh;
+	padding: 30rpx;
+	border-bottom: 4px solid #C0C0C0;
+}
+.top input{
+	font-size: 16px;
+	font-weight: bold;
+}
+.top .txt{
+	color: #C0C0C0;
+	text-align: right;
+}
+.cent{
+	height: 50vh;
+	padding: 30rpx;
+}
+.end{
+	height: 10vh;
+	padding: 30rpx;
+}
+

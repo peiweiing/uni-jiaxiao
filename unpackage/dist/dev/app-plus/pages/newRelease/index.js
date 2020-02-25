@@ -1,0 +1,2 @@
+setCssToHead([".",[1],"top{ height: 10vh; padding: ",[0,30],"; border-bottom: 4px solid #C0C0C0; }\n.",[1],"top wx-input{ font-size: 16px; font-weight: bold; }\n.",[1],"top .",[1],"txt{ color: #C0C0C0; text-align: right; }\n.",[1],"cent{ height: 50vh; padding: ",[0,30],"; }\n.",[1],"end{ height: 10vh; padding: ",[0,30],"; }\n",],undefined,{path:"./pages/newRelease/index.wxss"})();
+document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/newRelease/index.wxml') } }));

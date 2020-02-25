@@ -11,7 +11,11 @@
     "pages/kaochangs/index",
     "pages/jiaxiao/index",
     "pages/jiaxiaos/index",
-    "pages/info/index"
+    "pages/info/index",
+    "pages/newRelease/index",
+    "pages/myforget/index",
+    "pages/mylogin/index",
+    "pages/myregister/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
