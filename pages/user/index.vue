@@ -2,16 +2,17 @@
 	<view>
 		<view class="container">
 		  <view class="userinfo">
-			<button @click="login">登录</button>
+			<!-- <button @click="login">登录</button> -->
 			<block>
-			  <image class="userinfo-avatar" mode="cover"></image>
+			  <image class="userinfo-avatar" :src='userinfo.avatar'></image>
+			  <text class="static">{{userinfo.phone}}</text></text>
 			  <view>
 				<text class="userinfo-nickname"></text>
-				<text>学号：{{xuehao}}</text>
+				<text>{{usertype == 1 ? '考生编号' : '教练编号'}}：{{userid}}</text>
 			  </view>
 			</block>
 		  </view>
-		  <view class="usertab">
+		  <!-- <view class="usertab">
 			<view>
 			  <image src="../../static/img/xuexiao.png"></image>
 			  <button>班级</button>
@@ -20,23 +21,23 @@
 			  <image src="../../static/img/xuexiao.png"></image>
 			  <button>班级</button>
 			</view>
-		  </view>
+		  </view> -->
 		  <view class="usericon">
 			<view>
-			  <text>0</text>
+			  <text>{{userinfo.article}}</text>
 			  <text>帖子</text>
 			</view>
 			<view>
-			  <text>0</text>
-			  <text>回复</text>
-			</view>
-			<view>
-			  <text>0</text>
-			  <text>收藏</text>
-			</view>
-			<view>
-			  <text>0</text>
+			  <text>{{userinfo.replay}}</text>
 			  <text>消息</text>
+			</view>
+			<view>
+			  <text>{{userinfo.school}}</text>
+			  <text>考场</text>
+			</view>
+			<view>
+			  <text>{{userinfo.room}}</text>
+			  <text>驾校</text>
 			</view>
 		  </view>
 		</view>
@@ -64,19 +65,58 @@
 	export default {
 		data() {
 			return {
-				userInfo: {},
+				userinfo: {},
+				userid:'',
+				usertype:'',
 				hasUserInfo: false,
-				xuehao: "18125",
 				arr:[
 				  { src: "../../static/img/jinbi.png", txt: "我的报名", url: "../ubaoming/index" },
 				  { src: "../../static/img/jinbi.png", txt: "我的收藏", url: "../ushoucang/index" },
 				  { src: "../../static/img/jinbi.png", txt: "我的约课", url: "../uyueke/index" },
-				  { src: "../../static/img/jinbi.png", txt: "我的学币", url: "" },
-				  { src: "../../static/img/jinbi.png", txt: "我的学币", url: "" },
+				  // { src: "../../static/img/jinbi.png", txt: "我的学币", url: "" },
+				  // { src: "../../static/img/jinbi.png", txt: "我的学币", url: "" },
 				],
 			}
 		},
+		onShow() {
+			this.userid=uni.getStorageSync('userinfo')['id'];
+			this.usertype=uni.getStorageSync('userinfo')['usertype'];
+			this.getinfo();
+		},
+		onLoad() {
+			var that = this;
+			that.userid=uni.getStorageSync('userinfo')['id'];
+			if(that.userid&&that.userid!=""&&that.userid!=null){
+				that.getinfo();
+			}else{
+				uni.reLaunch({
+					url: '/pages/mylogin/index'
+				});			
+				return false;
+			}
+		},
 		methods: {
+			getinfo(){
+				var that=this;
+				var url = that.$url;
+				if(that.usertype == 1){
+					url += 'Index/student_userInfo?student_id='+ this.userid;
+				}else{
+					url +='Index/coach_info?coach_id='+ this.userid;
+				}
+
+				uni.request({
+					url: url, //仅为示例，并非真实接口地址。
+					method :'GET',
+					header:{  
+						'content-type': 'application/x-www-form-urlencoded'
+					},  
+					success: (res) => {	
+						console.log(res.data.data);
+						that.userinfo=res.data.data;
+					}
+				});
+			},
 			login(){
 				uni.navigateTo({
 					url: '/pages/mylogin/index'
@@ -90,7 +130,7 @@
 	.container{
 	  /* background-color: greenyellow; */
 	  background: url('../../static/img/bgc.png') no-repeat top;
-	  background-size: 100% 160%;
+	  background-size: 100% 80%;
 	  padding-top: 60rpx;
 	  box-sizing: border-box;
 	}

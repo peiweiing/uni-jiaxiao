@@ -35,17 +35,9 @@
 			  <text class="three1">{{v.create_time}}</text>
 			  <text class="three2">考试须知</text>
 			</view>
+			<view class="pinglun">
+			</view>
 		  </view>
-		<view class="huifuall">
-			<view class="huifu">
-				<text class="huifu1">{{}}蓝莲花:</text>
-				<text class="huifu2">{{}}这个不错哦这个不错哦这个不错哦这个不错哦这个不错哦</text>
-			</view>
-			<view class="huifu">
-				<text class="huifu1">{{}}蓝莲花:</text>
-				<text class="huifu2">{{}}这个不错哦这个不错哦这个不错哦这个不错哦这个不错哦</text>
-			</view>
-		</view>
 		  <view class="divend">
 			<view>
 			  <image src="../../static/img/xfenxiang.png"></image>
@@ -289,16 +281,6 @@
 	  border-radius: 30rpx;
 	  background-color: #ccc;
 	}
-	
-	.huifuall{
-		padding: 20rpx;
-		background-color: #ccc;
-	}
-	.huifu1{
-		/* color: #007AFF; */
-		padding-right: 10rpx;
-	}
-	
 	.divend{
 	  font-size: 12px;
 	  display: flex;

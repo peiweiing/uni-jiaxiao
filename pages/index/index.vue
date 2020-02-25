@@ -43,11 +43,11 @@
 		<view class="div">
 			<view class="mores">
 				<text class="txt">考场推荐</text>
-				<text class="more" @click="kaochang">更多</text>
+				<text class="more" @click="kaochang">更多>></text>
 			</view>
 			<view class="divcs" v-if="room_status">
 				<view class="width">
-					<view v-for="(v,i) in arra" :data-id="v.id" @click="kaochangs">
+					<view v-for="(v,i) in arra" :data-id="v.id">
 						<image class="img" :src="v.pic"></image>
 					</view>
 				</view>
@@ -57,7 +57,7 @@
 		<view class="div">
 			<view class="mores">
 				<text class="txt">驾校推荐</text>
-				<text class="more" @click="jiaxiao">更多</text>
+				<text class="more" @click="jiaxiao">更多>></text>
 			</view>
 			<view class="divcs" v-if="school_status">
 				<view class="width">
@@ -68,7 +68,6 @@
 			</view>
 			<view class="divcs" v-else><text style="color: red;">{{arrb}}</text></view>
 		</view>
-		
 	</view>
 </template>
 
@@ -81,6 +80,8 @@
 		},
 		data() {
 			return {
+				about_phone:'',
+				
 				banner_status : true,
 				room_status:true,
 				school_status:true,
@@ -89,21 +90,21 @@
 				current: 0,
 				mode: 'default',
 				dotsStyles: {},
-				// info: [
-				// 	{url: '../../static/img/lunbo.png',},
-				// 	{url: '../../static/img/lunbo.png',},
-				// 	{url: '../../static/img/lunbo.png',}
-				// ],
-				lunbo:[
-					{src:'../../static/img/lunbo.png'},
-					{src:'../../static/img/lunbo.png'},
-					{src:'../../static/img/lunbo.png'},
+				lunbo: [
+					{url: '../../static/img/lunbo.png',},
+					{url: '../../static/img/lunbo.png',},
+					{url: '../../static/img/lunbo.png',}
 				],
+				// lunbo:[
+				// 	{src:'../../static/img/lunbo.png'},
+				// 	{src:'../../static/img/lunbo.png'},
+				// 	{src:'../../static/img/lunbo.png'},
+				// ],
 				icon:[
-					{src:'../../static/img/xiao.png',txt:'考场详情',url:''},
-					{src:'../../static/img/xiao.png',txt:'考场详情',url:''},
-					{src:'../../static/img/xiao.png',txt:'考场详情',url:''},
-					{src:'../../static/img/xiao.png',txt:'考场详情',url:''},
+					{src:'../../static/img/xiao.png',txt:'考场详情',url:'/pages/kaochang/index'},
+					{src:'../../static/img/xiao.png',txt:'驾校详情',url:'/pages/kaochang/index'},
+					{src:'../../static/img/xiao.png',txt:'关于我们',url:'/pages/about/index'},
+					{src:'../../static/img/xiao.png',txt:'联系我们',url:''},
 				],
 				arra:[
 					
@@ -117,6 +118,7 @@
 			this.getbanner();
 			this.getdriving_room();
 			this.getdriving_school();
+			this.getabout_phone();
 		},
 		methods: {
 			change(e) {
@@ -138,8 +140,8 @@
 				uni.navigateTo({
 					url: '/pages/jiaxiao/index'
 				});
-				
 			},
+			
 			jiaxiaos(e){
 				var id = e.currentTarget.dataset.id;
 				uni.navigateTo({
@@ -148,6 +150,22 @@
 				
 			},
 			/* 
+				轮播图
+			 */
+			getabout_phone(){
+				var url = this.$url;
+				uni.request({
+					url:url+'Index/get_about_phone',
+					success:(e)=>{
+						if (e.data.error == 400) {
+						  this.about_phone = e.data.info;
+						} else if(e.data.error == 200){
+							this.about_phone = e.data.data;
+						}
+					}
+				})
+			},
+			/*
 				轮播图
 			 */
 			getbanner(){

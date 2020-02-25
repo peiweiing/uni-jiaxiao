@@ -1,16 +1,9 @@
 <template>
 	<view>
 		
-		<view class="divcs" v-if="bm_status">
-		  <view class="div" v-for="s in apponitment_res">
-		    <image :src="s.pic"></image>
-		    <view>
-		      <text class="t1">{{s.license_name}}</text>
-		      <text class="t2">￥{{s.price}}</text>
-		    </view>
-		  </view>
+		<view class="divcs">
+			{{aboutus}}
 		</view>
-		<view class="divcs" v-else><text>{{bm_res}}</text></view>
 		
 	</view>
 </template>
@@ -19,35 +12,22 @@
 	export default {
 		data() {
 			return {
-				bm_status:true,
-				userid:'',
-				apponitment_status:true,
-				apponitment_res: [
-				  
-				]
+				aboutus:''
 			}
 		},
 		onLoad() {
-			this.userid=uni.getStorageSync('userinfo')['id'];
-			this.get_student_apponitment();
+			this.get_aboutus();
 		},
 		methods: {
-			get_student_apponitment(){
+			get_aboutus(){
 				var url = this.$url;
 				uni.request({
-					url:url+'Index/student_apponitment',
-					data:{
-						student_id:this.userid
-					},
-					method:'POST',
+					url:url+'Index/get_about',
 					success: (e) => {
 						if(e.data.error == 400){
-							this.apponitment_status = false;
-							this.apponitment_res = e.data.info;
-							this.bm_status = false;
-							this.bm_res = e.data.info;
+							this.aboutus = e.data.info;
 						}else{
-							this.apponitment_res = e.data.data;
+							this.aboutus = e.data.data;
 						}
 					}
 				})

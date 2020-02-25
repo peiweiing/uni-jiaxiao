@@ -4,41 +4,23 @@
             <div class="forget">找回密码</div>
             <div class="forgetcs">
                 <div class="divcs">
-					
-					<view class="uni-form-item uni-column">
-						<radio-group class="uni-list" @change="radioChange">
-							<label class="uni-list-cell uni-list-cell-pd" v-for="(item,index) in radioItems" :key="index">
-								<view>
-									<radio :id="item.name" :value="item.name" :checked="item.checked"></radio>
-								</view>
-								<view>
-									<label class="label-2-text" :for="item.name">
-										<text>{{item.value}}</text>
-									</label>
-								</view>
-							</label>
-						</radio-group>
-					</view>
-					
                     <div class="div" style="display: flex;align-items: center;">
                         <div style="display: flex;align-items: center;">
-                            <image class="shouji" src="../../static/img/login_mm.png" alt=""></image>
+                            <img src="../../static/img/login_mm.png" alt="">
                             <input id="phoneId" :class="dool ? 'inputcs': 'inputcs xiahuared'" type="text" name="username" placeholder="请输入手机号" v-model="loginname" @blur="fun2()">
                         </div>
-                        <button class="huoqu" type="button" @click="fun3()">
-							获取验证码
-						</button>
+                        <input class="huoqu" type="button" value="获取验证码" @click="fun3()">
                     </div>
                     <div class="div" style="display: flex;align-items: center;">
-                        <image class="mima" src="../../static/img/login_mm.png" alt=""></image>
+                        <img src="../../static/img/login_mm.png" alt="">
                         <input class="inputcs" type="text" placeholder="请输入验证码" v-model="logincode">
                     </div>
                     <div class="div" style="display: flex;justify-content: space-between;align-items: center;">
-                        <div style="display: flex;align-items: center;">
-                            <image class="mima" src="../../static/img/login_mm.png" alt=""></image>
+                        <div>
+                            <img src="../../static/img/login_mm.png" alt="">
                             <input class="inputcs"  :type="pwdtype" name="password" placeholder="请输入密码" v-model="loginpwd">
                         </div>
-                        <image class="mima" :src="openeye" alt="" @click="changetype"></image>
+                        <img :src="openeye" alt="" @click="changetype">
                     </div>
                 </div>
                 
@@ -55,16 +37,6 @@
 export default {
     data(){
         return{
-			radioItems: [{
-					name: 'jiaolian',
-					value: '教练'
-				},
-				{
-					name: 'xueyuan',
-					value: '学员',
-					checked: 'true'
-				}
-			],
             loginname:"",//注册页面用户名//判断输入框的值是否符合用户名规则
             loginpwd:"",//密码
             logincode:"",//输入的验证码
@@ -78,10 +50,6 @@ export default {
         }
     },
     methods:{
-		radioChange: function(e) {
-			var checked = e.target.value
-			console.log(checked)
-		},
         changetype() {
             this.pwdtype = this.pwdtype === 'password' ? 'text' : 'password';
             this.openeye = this.openeye == require("../../static/img/login_yanjing.png") ? require("../../static/img/login_yanjing_01.png") : require("../../static/img/login_yanjing.png");
@@ -169,19 +137,6 @@ export default {
 }
 </script>
 <style scoped>
-	.uni-list{
-		font-size: 16px;
-		display: flex;
-		justify-content: space-around;
-	}
-	.shouji{
-		width:32rpx;
-		height: 44rpx;
-	}
-	.mima{
-		width: 36rpx;
-		height:36rpx;
-	}
 .boxcs{
     height: 94vh;
     color: #333;
@@ -227,12 +182,9 @@ export default {
     /* border-bottom:1px solid #000; */
 }
 .huoqu{
-	height: 44rpx;
-	line-height: 44rpx;
-    padding-left: 0.5rem;
+    padding-left: 0.1rem;
     color: #4adcdc;
     background-color: #fff;
-	outline: none;
     border: none;
     border-left:1px solid #4adcdc;
 }

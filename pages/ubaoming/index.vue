@@ -62,6 +62,7 @@
 		data() {
 			return {
 				current: 0,
+				userid:'',
 				items: [
 					'驾校报名',
 					'考场报名'
@@ -80,6 +81,7 @@
 			}
 		},
 		onLoad() {
+			this.userid=uni.getStorageSync('userinfo')['id'];
 			this.get_baoming(2);
 		},
 		methods: {
@@ -98,7 +100,7 @@
 				uni.request({
 					url:url+'Index/student_baoming',
 					data:{
-						student_id:2,
+						student_id:this.userid,
 						type:type
 					},
 					method:'POST',
