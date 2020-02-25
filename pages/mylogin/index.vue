@@ -1,44 +1,69 @@
 <template>
-    <div class="boxcs">
+    <view class="boxcs">
 		
-        <div v-if="loading"><img class="boximg" src="static/loading.gif" alt=""></div>
-        <div v-else>
-            <div class="login">登录</div>
-            <div class="logincs">
-                <div class="divcs" style="display: flex;flex-direction: column;">
+        <view v-if="loading"><img class="boximg" src="static/loading.gif" alt=""></view>
+        <view v-else>
+            <view class="login">登录</view>
+            <view class="logincs">
+                <view class="divcs" style="display: flex;flex-direction: column;">
 					
-                    <div class="div" style="display: flex;align-items: center;">
-                        <img src="../../static/img/login_sj.png" alt="">
+					<view class="uni-form-item uni-column">
+						<radio-group class="uni-list" @change="radioChange">
+							<label class="uni-list-cell uni-list-cell-pd" v-for="(item,index) in radioItems" :key="index">
+								<view>
+									<radio :id="item.name" :value="item.name" :checked="item.checked"></radio>
+								</view>
+								<view>
+									<label class="label-2-text" :for="item.name">
+										<text>{{item.value}}</text>
+									</label>
+								</view>
+							</label>
+						</radio-group>
+					</view>
+					
+                    <view class="div" style="display: flex;align-items: center;">
+                        <image class="shouji" src="../../static/img/login_sj.png" alt=""></image>
                         <input id="userId" :class="dool ? 'inputcs': 'inputcs xiahuared'" type="phone" name="username" placeholder="请输入手机号"  @blur="login()" v-model="username">
-                    </div>
+                    </view>
 
-                    <div class="div" style="display: flex;justify-content: space-between;align-items: center;">
-                        <div>
-                            <img src="../../static/img/login_mm.png" alt="">
+                    <view class="div" style="display: flex;justify-content: space-between;align-items: center;">
+                        <view style="display: flex;align-items: center;">
+                            <image class="mima" src="../../static/img/login_mm.png" alt=""></image>
                             <input class="inputcs" :type="pwdtype"  name="userpass" placeholder="请输入密码" v-model="userpwd">
-                        </div>
-                        <img :src="openeye" alt="" @click="changetype">
-                    </div>
+                        </view>
+                        <image class="mima" :src="openeye" alt="" @click="changetype"></image>
+                    </view>
 
-                    <div class="textcs" style="display: flex;justify-content: space-between;">
+                    <view class="textcs" style="display: flex;justify-content: space-between;">
                         <span @click="forget()">找回密码</span>
                         <span @click="register()">注册</span>
-                    </div>
+                    </view>
 
-                </div>
+                </view>
 
-                <div class="main">
+                <view class="main">
                     <button  :disabled="btnbooll" :class="btnbooll ? 'butcs butcss' : 'butcs'" type="button" @click="onlogin()">登录</button>
-                </div>
-            </div>
-            <div class="url"></div>
-        </div>
-    </div>
+                </view>
+            </view>
+            <view class="url"></view>
+        </view>
+    </view>
 </template>
 <script>
 export default {
     data(){
         return{
+			radioItems: [{
+					name: 'jiaolian',
+					value: '教练'
+				},
+				{
+					name: 'xueyuan',
+					value: '学员',
+					checked: 'true'
+				}
+			],
 			usertype:1,
             username:"",//登录页面用户名
             userpwd:"",//密码
@@ -56,6 +81,10 @@ export default {
         },1000)
     },
     methods:{
+		radioChange: function(e) {
+			var checked = e.target.value
+			console.log(checked)
+		},
         changetype() {//隐藏显示密码
             this.pwdtype = this.pwdtype === 'password' ? 'text' : 'password';
             this.openeye = this.openeye == require("../../static/img/login_yanjing.png") ? require("../../static/img/login_yanjing_01.png") : require("../../static/img/login_yanjing.png");
@@ -127,6 +156,18 @@ export default {
 }
 </script>
 <style scoped>
+	.uni-list{
+		display: flex;
+		justify-content: space-around;
+	}
+	.shouji{
+		width:32rpx;
+		height: 44rpx;
+	}
+	.mima{
+		width: 36rpx;
+		height:36rpx;
+	}
 .boxcs{
     height: 94vh;
     color: #333;
@@ -162,6 +203,7 @@ export default {
     padding-bottom: 0.5rem;
     padding-top: 0.8rem;
 }
+
 .textcs{
 	font-size: 14px;
     padding-top: 1rem;
